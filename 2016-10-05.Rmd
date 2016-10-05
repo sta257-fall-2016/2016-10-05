@@ -1,0 +1,115 @@
+---
+title: "STA257"
+author: "Neil Montgomery | HTML is official | PDF versions good for in-class use only"
+date: "Last edited: `r format(Sys.time(), '%Y-%m-%d %H:%M')`"
+output: 
+  ioslides_presentation: 
+    css: '../styles.css' 
+    widescreen: true 
+    transition: 0.001
+---
+\newcommand\given[1][]{\:#1\vert\:}
+\newcommand\P[1]{P{\left(#1\right)}}
+
+## the "negative binomial" distributions { .build }
+
+Consider a Bernoulli$(p)$ process. Count the number of trials until the $r^{th}$ "success". 
+
+This is a random variable. Call it $X$.
+
+What is the p.m.f. of $X$?
+
+$$p(k) = P(X=k) = \begin{cases}
+{{k - 1} \choose {r - 1}}p^k(1-p)^{k-r}  & x\in\{r,r+1,r+2,\ldots\}\\
+0 & \text{otherwise}\end{cases}$$
+
+Is this a valid pmf? Yes (a little obscure to figure out)
+
+We say $X$ has a negative binomial distribution with paramters $p$ and $r$, or $X \sim \text{NegBin}(p, r)$.
+
+## the "hypergeometric distributions"
+
+Many examples from Ch. 1 (quality control, Lotto, some of the balls in urns etc.)
+
+Consider a Bernoulli process, stopped after $n$ trials in which there were $r$ "successes". Let $X$ be the number of successes in the "first" $m$ out of $n$ trials.
+
+What is the p.m.f. of $X$?
+
+$$p(k) = P(X=k) = \begin{cases}
+\frac{{r \choose k}{n-r \choose m-k}}{{n \choose m}} &: k \in \{0,\ldots,r\}\\
+0 &: \text{ otherwise}\end{cases}$$
+
+Is this a valid pmf? Yes. (Problem 34 from Chapter 1)
+
+We say $X$ has a hypergeometric distribution with paramters $r$, $n$, and $m$. 
+
+## digression --- constants as "random variables"
+
+In calculus etc. you may have (unconsciously) considered things like $f(x) + a$ for real constant $a$. This could have a few interpretations, such as:
+
+1. The sum of the numbers $f(x)$ and $a$.
+2. The value of the function $f + g$ evaluated at $x$, in which it happens that $g(x)=a$ for all $x$. 
+
+We do this in probability as well. We can allow a random variable $X$ to be some constant $a$ no matter what. Then $X$ is discrete with :
+
+$$\begin{align*}
+p(x) &= P(X=x) = \begin{cases}
+1 \ :\  x=a\\
+0 \ :\ \text{otherwise,}\end{cases}\\
+F(x) &= P(X\le x) =\begin{cases}
+0 \ :\  x<a\\
+1 \ :\ x\ge a.\end{cases}
+\end{align*}$$
+
+## the Poisson distributions - I
+
+Named after a French guy called Poisson. 
+
+Can be defined completely abstractly just by declaring $X$ has a Poisson distribution with parameter $\lambda$, or $X\sim$Poisson$(\lambda)$, if $X$ has p.m.f:
+
+$$p(k) = P(X=k) = \begin{cases}
+\frac{\lambda^ke^{-\lambda}}{k!} &: k \in \{0, 1, 2, \ldots\}\\
+0 &: \text{otherwise.}
+\end{cases}$$
+
+Is this a valid p.m.f.? Yes. 
+
+But this does not come close to explaining the importance of the Poisson distributions. 
+
+## Bernoulli process --- with a time scale { .build }
+
+Consider a Binomial$(n,p)$ distribution. Let's introduce a time scale to the underlying Bernoulli$(p)$ process.
+
+Step 1. Take a fixed time interval $(0, t)$ and divide it into $n_1 = n$ subintervals and let $p_1 =p$. Let's say one Bernoulli$(p_1)$ trial happens inside each subinterval, and we keep track of the number of "successes".
+
+A few "general" observations:
+
+* Only one success can happen inside each subinterval.
+* Results in non-overlapping collections of subintervals are independent.
+* Successes happen at a "rate" of about $n\cdot p$ (intuitively) over the whole time $(0,t)$, and the number of $k$ successes has a Binomial$(n_1,p_1)$ distribution.
+* $t$ didn't matter --- if we double it to $2t$ the rate doubles also to $2np$. 
+
+## double the number of intervals { .build }
+
+Step 2. Divide the same interval into $n_2=2n$ subintervals. 
+
+We want a trial to happen inside each subinterval, *but we want the same overall "rate" of success.*
+
+So now we allow a Bernoulli($p_2$) trial with $p_2 = p/2$   to occur inside each subinterval. 
+
+The same "general" observations continue to hold, except now the number of successes has a Binomial$(2n,p/2)$ distribution.
+
+Double the number of intervals again... (so now $(0,t)$ has $4n$ intervals with a Bernoulli($p/4$) trial in each.)
+
+## pass to the limit { .build }
+
+Define $\lambda t$ ("rate") to be fixed and always equal to $np$. This implies $p = \frac{\lambda t}{n}$.
+
+What happens to Binomial$\left(n, \frac{\lambda t}{n}\right)$ distributions as $n \rightarrow \infty$?
+
+$\lambda$ is the rate of occurrences per unit time.
+
+Examples and more discussion next time.
+
+
+
