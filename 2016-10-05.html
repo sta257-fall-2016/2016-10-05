@@ -89,7 +89,7 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Last edited: 2016-10-05 14:47</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Last edited: 2016-10-05 22:21</p>
           </hgroup>
   </slide>
 
@@ -102,18 +102,71 @@
 <p>What is the p.m.f. of \(X\)?</p>
 
 <p>\[p(k) = P(X=k) = \begin{cases}
-{{k - 1} \choose {r - 1}}p^k(1-p)^{k-r}  &amp; x\in\{r,r+1,r+2,\ldots\}\\
+{{k - 1} \choose {r - 1}}p^r(1-p)^{k-r}  &amp; k\in\{r,r+1,r+2,\ldots\}\\
 0 &amp; \text{otherwise}\end{cases}\]</p>
 
 <p>Is this a valid pmf? Yes (a little obscure to figure out)</p>
 
 <p>We say \(X\) has a negative binomial distribution with paramters \(p\) and \(r\), or \(X \sim \text{NegBin}(p, r)\).</p>
 
-</article></slide><slide class=''><hgroup><h2>the &quot;hypergeometric distributions&quot;</h2></hgroup><article  id="the-hypergeometric-distributions">
+</article></slide><slide class=''><hgroup><h2>added after class - I</h2></hgroup><article  id="added-after-class---i" class="small">
+
+<p>There was an error in what I put on the board. As penance, I&#39;ll give you some more information you might find useful in your travels, but is not so critical for this course.</p>
+
+<p>First, the formula \({n \choose k} = \frac{n!}{k!(n-k)!}\) has a few conventions and extensions associated with it. That version of the formula is the most direct translation of its combinatoric interpretation (number of ways to pick \(k\) out of \(n\).) By convention, because of the combinatoric interpretation, when \(n=0\) we say \({n \choose k} = 0\). There is &quot;no way&quot; to pick k items out of 0.</p>
+
+<p>But that formula is often inconvenient for calculation. So often one uses (in fact we&#39;ll do this on October 12) this version: \[{n \choose k} = \frac{n(n-1)(n-2)\cdots(n-k+1)}{k!}\]</p>
+
+</article></slide><slide class=''><hgroup><h2>added after class - II</h2></hgroup><article  id="added-after-class---ii" class="small">
+
+<p>Note the numerator has \(k\) terms in it. The nice thing about this formula is that it can be extended to negative numbers (and indeed to any real number, which we won&#39;t bother with) as follows:</p>
+
+<p>\[{-n \choose k} = \frac{(-n)(-n-1)(-n-2)\cdots(-n-k+1)}{k!}\]</p>
+
+<p>By convention \({-n \choose 0}=1\). One can show (easy to find on internet) a version of the Binomial Theorem with negative exponent:</p>
+
+<p>\[(1 + x)^{-n} = \sum_{k=0}^\infty {-n \choose k} x^k, \text{ for } |x| &lt; 1\]</p>
+
+<p>It is expressed this way rather than something like \((a+b)^{-n}\) to avoid difficulties in saying where the infinite series converges.</p>
+
+</article></slide><slide class=''><hgroup><h2>added after class - III</h2></hgroup><article  id="added-after-class---iii" class="small">
+
+<p>The eventual goal here is to prove the NegBin\((r,p)\) sums to 1. But that pmf has \({r - 1 \choose k -1}\) in it, which isn&#39;t exactly what appears in this &quot;negative&quot; Binomial theorem. The following will turn out to be useful (to follow along note there are \(k\) terms on top):</p>
+
+<p>\[\begin{align*}
+{k + r - 1 \choose k} &amp;= \frac{(k+r-1)(k+r-2)\cdots r}{k!}\\
+&amp;= (-1)^k\frac{(-r-(k-1))(-r-(k-2))\cdots(-r)}{k!}\\
+&amp;= (-1)^k{-r \choose k}
+\end{align*}\]</p>
+
+<p>Also we&#39;ll use \({k-1 \choose r-1} = {k-1 \choose k-r}\) (think combinatorically to see this is true.)</p>
+
+</article></slide><slide class=''><hgroup><h2>added after class - IV</h2></hgroup><article  id="added-after-class---iv" class="small">
+
+<p>Now we&#39;ll get back to the NegBin\((r,p)\) p.m.f.: \[\begin{align*}
+\sum_{k=r}^\infty p(k) &amp;= \sum_{k=r}^\infty {k-1 \choose r-1} p^r(1-p)^{k-r}\\
+&amp;= \sum_{k=r}^\infty {k - 1 \choose k-r} p^r(1-p)^{k-r}\\
+&amp;= \sum_{k=0}^\infty {k + r -1 \choose k} p^r(1-p)^k\\
+&amp;= p^r \sum_{k=0}^\infty (-1)^k {-r \choose k} (1-p)^k
+\end{align*}\]</p>
+
+</article></slide><slide class=''><hgroup><h2>added after class - V</h2></hgroup><article  id="added-after-class---v" class="small">
+
+<p>Continued: \[\begin{align*}
+\sum_{k=r}^\infty p(k) &amp;= p^r \sum_{k=0}^\infty (-1)^k {-r \choose k} (1-p)^k\\
+&amp;= p^r \sum_{k=0}^\infty {-r \choose k} (-1+p)^k\\
+&amp;= p^r(1 - 1 + p)^{-r} = 1
+\end{align*}\]</p>
+
+<p>All these developments are not hard to find in books and elsewhere. The value is in the journey more so than the final destination. We might need something from all this later on, or maybe not. You will not be responsible for it in this course.</p>
+
+<p>Also, note that the (only) reason this distribution is called &quot;negative binomial&quot; is because of the use of the &quot;negative&quot; version of the Binomial Theorem.</p>
+
+</article></slide><slide class=''><hgroup><h2>the &quot;hypergeometric distributions&quot;</h2></hgroup><article  id="the-hypergeometric-distributions" class="small">
 
 <p>Many examples from Ch. 1 (quality control, Lotto, some of the balls in urns etc.)</p>
 
-<p>Consider a Bernoulli process, stopped after \(n\) trials in which there were \(r\) &quot;successes&quot;. Let \(X\) be the number of successes in the &quot;first&quot; \(m\) out of \(n\) trials.</p>
+<p>Consider a Bernoulli process, stopped after \(n\) trials in which there were \(r\) &quot;successes&quot;. Let \(X\) be the number of successes in the &quot;first&quot; \(m\) out of \(n\) trials. <em>Note: this relationship between hypergeometric and Bernoulli process is correct, but a bit contrived. Best to think of it in terms of sampling without replacement from finite populations. Statistics students will find they don&#39;t encounter this distribution all that often.</em></p>
 
 <p>What is the p.m.f. of \(X\)?</p>
 
@@ -172,7 +225,7 @@ F(x) &amp;= P(X\le x) =\begin{cases}
 <li>Only one success can happen inside each subinterval.</li>
 <li>Results in non-overlapping collections of subintervals are independent.</li>
 <li>Successes happen at a &quot;rate&quot; of about \(n\cdot p\) (intuitively) over the whole time \((0,t)\), and the number of \(k\) successes has a Binomial\((n_1,p_1)\) distribution.</li>
-<li>\(t\) didn&#39;t matter &#8212; if we double it to \(2t\) the rate doubles also to \(2np\).</li>
+<li>\(t\) didn&#39;t matter &#8212; if we double it to \(2t\) the rate simply doubles also, to \(2np\).</li>
 </ul>
 
 </article></slide><slide class=''><hgroup><h2>double the number of intervals</h2></hgroup><article  id="double-the-number-of-intervals" class="build">
@@ -185,7 +238,7 @@ F(x) &amp;= P(X\le x) =\begin{cases}
 
 <p>The same &quot;general&quot; observations continue to hold, except now the number of successes has a Binomial\((2n,p/2)\) distribution.</p>
 
-<p>Double the number of intervals again&#8230; (so now \((0,t)\) has \(4n\) intervals with a Bernoulli(\(p/4\)) trial in each.)</p>
+<p>Step 4. Double the number of intervals again&#8230; (so now \((0,t)\) has \(4n\) intervals with a Bernoulli(\(p/4\)) trial in each)&#8230;</p>
 
 </article></slide><slide class=''><hgroup><h2>pass to the limit</h2></hgroup><article  id="pass-to-the-limit" class="build">
 

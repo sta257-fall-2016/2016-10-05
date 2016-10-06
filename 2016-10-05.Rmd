@@ -20,18 +20,74 @@ This is a random variable. Call it $X$.
 What is the p.m.f. of $X$?
 
 $$p(k) = P(X=k) = \begin{cases}
-{{k - 1} \choose {r - 1}}p^k(1-p)^{k-r}  & x\in\{r,r+1,r+2,\ldots\}\\
+{{k - 1} \choose {r - 1}}p^r(1-p)^{k-r}  & k\in\{r,r+1,r+2,\ldots\}\\
 0 & \text{otherwise}\end{cases}$$
 
 Is this a valid pmf? Yes (a little obscure to figure out)
 
 We say $X$ has a negative binomial distribution with paramters $p$ and $r$, or $X \sim \text{NegBin}(p, r)$.
 
-## the "hypergeometric distributions"
+## added after class - I  { .small }
+
+There was an error in what I put on the board. As penance, I'll give you some more information you might find useful in your travels, but is not so critical for this course.
+
+First, the formula ${n \choose k} = \frac{n!}{k!(n-k)!}$ has a few conventions and extensions associated with it. That version of the formula is the most direct translation of its combinatoric interpretation (number of ways to pick $k$ out of $n$.) By convention, because of the combinatoric interpretation, when $n=0$ we say ${n \choose k} = 0$. There is "no way" to pick k items out of 0.
+
+But that formula is often inconvenient for calculation. So often one uses (in fact we'll do this on October 12) this version:
+$${n \choose k} = \frac{n(n-1)(n-2)\cdots(n-k+1)}{k!}$$
+
+## added after class - II  { .small }
+
+Note the numerator has $k$ terms in it. The nice thing about this formula is that it can be extended to negative numbers (and indeed to any real number, which we won't bother with) as follows:
+
+$${-n \choose k} = \frac{(-n)(-n-1)(-n-2)\cdots(-n-k+1)}{k!}$$
+
+By convention ${-n \choose 0}=1$. One can show (easy to find on internet) a version of the Binomial Theorem with negative exponent:
+
+$$(1 + x)^{-n} = \sum_{k=0}^\infty {-n \choose k} x^k, \text{ for } |x| < 1$$
+
+It is expressed this way rather than something like $(a+b)^{-n}$ to avoid difficulties in saying where the infinite series converges.
+
+## added after class - III  { .small }
+
+The eventual goal here is to prove the NegBin$(r,p)$ sums to 1. But that pmf has ${r - 1 \choose k -1}$ in it, which isn't exactly what appears in this "negative" Binomial theorem. The following will turn out to be useful (to follow along note there are $k$ terms on top):
+
+$$\begin{align*}
+{k + r - 1 \choose k} &= \frac{(k+r-1)(k+r-2)\cdots r}{k!}\\
+&= (-1)^k\frac{(-r-(k-1))(-r-(k-2))\cdots(-r)}{k!}\\
+&= (-1)^k{-r \choose k}
+\end{align*}$$
+
+Also we'll use ${k-1 \choose r-1} = {k-1 \choose k-r}$ (think combinatorically to see this is true.)
+
+## added after class - IV { .small }
+
+Now we'll get back to the NegBin$(r,p)$ p.m.f.:
+$$\begin{align*}
+\sum_{k=r}^\infty p(k) &= \sum_{k=r}^\infty {k-1 \choose r-1} p^r(1-p)^{k-r}\\
+&= \sum_{k=r}^\infty {k - 1 \choose k-r} p^r(1-p)^{k-r}\\
+&= \sum_{k=0}^\infty {k + r -1 \choose k} p^r(1-p)^k\\
+&= p^r \sum_{k=0}^\infty (-1)^k {-r \choose k} (1-p)^k
+\end{align*}$$
+
+## added after class - V { .small }
+
+Continued:
+$$\begin{align*}
+\sum_{k=r}^\infty p(k) &= p^r \sum_{k=0}^\infty (-1)^k {-r \choose k} (1-p)^k\\
+&= p^r \sum_{k=0}^\infty {-r \choose k} (-1+p)^k\\
+&= p^r(1 - 1 + p)^{-r} = 1
+\end{align*}$$
+
+All these developments are not hard to find in books and elsewhere. The value is in the journey more so than the final destination. We might need something from all this later on, or maybe not. You will not be responsible for it in this course.
+
+Also, note that the (only) reason this distribution is called "negative binomial" is because of the use of the "negative" version of the Binomial Theorem.
+
+## the "hypergeometric distributions" { .small }
 
 Many examples from Ch. 1 (quality control, Lotto, some of the balls in urns etc.)
 
-Consider a Bernoulli process, stopped after $n$ trials in which there were $r$ "successes". Let $X$ be the number of successes in the "first" $m$ out of $n$ trials.
+Consider a Bernoulli process, stopped after $n$ trials in which there were $r$ "successes". Let $X$ be the number of successes in the "first" $m$ out of $n$ trials. *Note: this relationship between hypergeometric and Bernoulli process is correct, but a bit contrived. Best to think of it in terms of sampling without replacement from finite populations. Statistics students will find they don't encounter this distribution all that often.*
 
 What is the p.m.f. of $X$?
 
@@ -87,7 +143,7 @@ A few "general" observations:
 * Only one success can happen inside each subinterval.
 * Results in non-overlapping collections of subintervals are independent.
 * Successes happen at a "rate" of about $n\cdot p$ (intuitively) over the whole time $(0,t)$, and the number of $k$ successes has a Binomial$(n_1,p_1)$ distribution.
-* $t$ didn't matter --- if we double it to $2t$ the rate doubles also to $2np$. 
+* $t$ didn't matter --- if we double it to $2t$ the rate simply doubles also, to $2np$. 
 
 ## double the number of intervals { .build }
 
@@ -99,7 +155,7 @@ So now we allow a Bernoulli($p_2$) trial with $p_2 = p/2$   to occur inside each
 
 The same "general" observations continue to hold, except now the number of successes has a Binomial$(2n,p/2)$ distribution.
 
-Double the number of intervals again... (so now $(0,t)$ has $4n$ intervals with a Bernoulli($p/4$) trial in each.)
+Step 4. Double the number of intervals again... (so now $(0,t)$ has $4n$ intervals with a Bernoulli($p/4$) trial in each)...
 
 ## pass to the limit { .build }
 
