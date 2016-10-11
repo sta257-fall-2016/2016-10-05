@@ -99,6 +99,60 @@ Is this a valid pmf? Yes. (Problem 34 from Chapter 1)
 
 We say $X$ has a hypergeometric distribution with paramters $r$, $n$, and $m$. 
 
+## added after class - hypergeometric vs. binomial - I { .small }
+
+You are not responsible for this material. 
+
+In Ch. 1 there were some urn and "quality control" questions that dealt with the as-yet unnamed hypergeometric distibutions. 
+
+Key to the hypergeometric distributions is the notion of "sampling without replacement". 
+
+For example, the urn has $r$ black balls and $n-r$ white balls. If you select a ball, it will be black with probability $p = r/n$ and white with $1-p = (n-r)/n$. 
+
+Now let's say you put the ball back in the urn, and then select a ball again. "Sampling with replacement." The black/white probabilities don't change. Successive draws are *independent*. If you do this $m$ times, the total number of black balls selected will have a Binomial($m,p$) distribution.
+
+## added after class - hypergeom vs. binom - II { .small }
+
+(You are not responsible for this material.)
+
+If you *don't* put the ball back in the urn after each selection you have "Sampling without replacement." Successive draws are *not* independent, because the probability of choosing a black ball in in the second selection depends on the outcome of the first selection. If you select $m$ balls the total number of black balls selected will have a hypergeometric distribution with parameters $n$, $r$, and $m$. 
+
+Let's look at the lack of independence in more detail. If $n=100$ and $r=50$, then the chance of a black ball is $50/100$ on the first select and then either $49/99$ or $50/99$ on the second. The probability changes - lack of independence - but it doesn't change by that much really.
+
+## added after class - hypergeom vs. binom - III { .small }
+
+(You are not responsible for this material.)
+
+Increase $n$ to 10000 and $r$ to 5000 (keeping $r/n$ the same.) Now the probabilities are $5000/10000$ and $4999/9999$ or $5000/9999$. Still different, but now even closer. In some sense, the lack of independence is becoming smaller.
+
+There is a way that the hypergeometric "converges" to the binomial, if you allow $n$ and $r$ to increase in a way that $r/n$ converges to a constant. We are going to look at the following:
+
+$$\lim_{\substack{n \to \infty \\ r \to \infty \\ r/n \to p}} 
+\frac{{r \choose k}{n-r \choose m-k}}{{n \choose m}}$$
+
+## added after class - hypergeom vs. binom - IV{ .small }
+
+(You are not responsible for this material.)
+
+$$
+\frac{{r \choose k}{n-r \choose m-k}}{{n \choose m}} =
+\frac{\frac{r(r-1) \cdots (r-k+1)}{k!}\frac{(n-r)(n-r-1) \cdots (n-r-(m-k)+1)}{(m-k)!}}{\frac{n(n-1)\cdots(n-m+1)}{m!}} \\
+= \frac{m!}{k!(m-k)!} \frac{\overbrace{r(r-1) \cdots (r-k+1)}^\text{$k$ terms}
+\overbrace{(n-r)(n-r-1) \cdots (n-r-(m-k)+1)}^\text{$m-k$ terms}}{\underbrace{n(n-1)\cdots(n-m+1)}_\text{$m$ terms}}\\
+= {m \choose k}\underbrace{\frac{r}{n}\frac{r-1}{n-1}\cdots\frac{r-k+1}{n-k+1}}_\text{$k$ terms}\underbrace{\frac{n-r}{n-k}
+\frac{n-r-1}{n-k-1}\cdots\frac{n-r-(m-k)+1}{n}}_\text{$m-k$ terms}
+$$
+
+## added after class - hypergeom vs. binom - V{ .small }
+
+(You are not responsible for this material.)
+
+Now let $n$ and $r$ go to $\infty$, but in proportion so that $r/n$ goes to a constant $0<p<1$. 
+
+There is a fixed number of terms, so the limit can be applied one term at a time. The first $k$ terms convege to $r/n=p$ and the last $m-k$ terms converge to $(n-r)/n = 1-p$. So the whole thing converges to:
+
+$${m \choose k} p^k(1-p)^{m-k}$$
+
 ## digression --- constants as "random variables"
 
 In calculus etc. you may have (unconsciously) considered things like $f(x) + a$ for real constant $a$. This could have a few interpretations, such as:

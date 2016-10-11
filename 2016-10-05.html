@@ -76,7 +76,6 @@
 
   <link href="data:text/css;charset=utf-8,p%2C%20li%2C%20pre%20%7B%0Acolor%3A%20black%3B%0A%7D%0Atd%20%7B%0Acolor%3A%20black%3B%0A%7D%0Atd%2C%20tr%2C%20th%20%7B%0Acolor%3A%20black%20%21important%3B%0Abackground%3Awhite%20%21important%3B%0Apadding%3A%204px%20%21important%3B%0A%7D%0Apre%20%7B%0Afont%2Dfamily%3A%20%27Source%20Code%20Pro%27%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2016px%3B%0Aline%2Dheight%3A%2022px%3B%0Apadding%3A%2010px%200%2010px%2060px%3B%0Aletter%2Dspacing%3A%20%2D1px%3B%0Amargin%2Dbottom%3A%2020px%3B%0Awidth%3A%20106%25%3B%0Aleft%3A%20%2D60px%3B%0Aposition%3A%20relative%3B%0A%2Dwebkit%2Dbox%2Dsizing%3A%20border%2Dbox%3B%0A%2Dmoz%2Dbox%2Dsizing%3A%20border%2Dbox%3B%0Abox%2Dsizing%3A%20border%2Dbox%3B%0A%0A%7D%0A%2Ermdtable%20%7B%0Aborder%2Dtop%3A%201px%20solid%20%23797979%0A%7D" rel="stylesheet" type="text/css" />
 
-
 </head>
 
 <body style="opacity: 0">
@@ -89,7 +88,7 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Last edited: 2016-10-05 22:21</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Last edited: 2016-10-11 15:10</p>
           </hgroup>
   </slide>
 
@@ -177,6 +176,60 @@
 <p>Is this a valid pmf? Yes. (Problem 34 from Chapter 1)</p>
 
 <p>We say \(X\) has a hypergeometric distribution with paramters \(r\), \(n\), and \(m\).</p>
+
+</article></slide><slide class=''><hgroup><h2>added after class - hypergeometric vs. binomial - I</h2></hgroup><article  id="added-after-class---hypergeometric-vs.-binomial---i" class="small">
+
+<p>You are not responsible for this material.</p>
+
+<p>In Ch. 1 there were some urn and &quot;quality control&quot; questions that dealt with the as-yet unnamed hypergeometric distibutions.</p>
+
+<p>Key to the hypergeometric distributions is the notion of &quot;sampling without replacement&quot;.</p>
+
+<p>For example, the urn has \(r\) black balls and \(n-r\) white balls. If you select a ball, it will be black with probability \(p = r/n\) and white with \(1-p = (n-r)/n\).</p>
+
+<p>Now let&#39;s say you put the ball back in the urn, and then select a ball again. &quot;Sampling with replacement.&quot; The black/white probabilities don&#39;t change. Successive draws are <em>independent</em>. If you do this \(m\) times, the total number of black balls selected will have a Binomial(\(m,p\)) distribution.</p>
+
+</article></slide><slide class=''><hgroup><h2>added after class - hypergeom vs. binom - II</h2></hgroup><article  id="added-after-class---hypergeom-vs.-binom---ii" class="small">
+
+<p>(You are not responsible for this material.)</p>
+
+<p>If you <em>don&#39;t</em> put the ball back in the urn after each selection you have &quot;Sampling without replacement.&quot; Successive draws are <em>not</em> independent, because the probability of choosing a black ball in in the second selection depends on the outcome of the first selection. If you select \(m\) balls the total number of black balls selected will have a hypergeometric distribution with parameters \(n\), \(r\), and \(m\).</p>
+
+<p>Let&#39;s look at the lack of independence in more detail. If \(n=100\) and \(r=50\), then the chance of a black ball is \(50/100\) on the first select and then either \(49/99\) or \(50/99\) on the second. The probability changes - lack of independence - but it doesn&#39;t change by that much really.</p>
+
+</article></slide><slide class=''><hgroup><h2>added after class - hypergeom vs. binom - III</h2></hgroup><article  id="added-after-class---hypergeom-vs.-binom---iii" class="small">
+
+<p>(You are not responsible for this material.)</p>
+
+<p>Increase \(n\) to 10000 and \(r\) to 5000 (keeping \(r/n\) the same.) Now the probabilities are \(5000/10000\) and \(4999/9999\) or \(5000/9999\). Still different, but now even closer. In some sense, the lack of independence is becoming smaller.</p>
+
+<p>There is a way that the hypergeometric &quot;converges&quot; to the binomial, if you allow \(n\) and \(r\) to increase in a way that \(r/n\) converges to a constant. We are going to look at the following:</p>
+
+<p>\[\lim_{\substack{n \to \infty \\ r \to \infty \\ r/n \to p}} 
+\frac{{r \choose k}{n-r \choose m-k}}{{n \choose m}}\]</p>
+
+</article></slide><slide class=''><hgroup><h2>added after class - hypergeom vs. binom - IV</h2></hgroup><article  id="added-after-class---hypergeom-vs.-binom---iv" class="small">
+
+<p>(You are not responsible for this material.)</p>
+
+<p>\[
+\frac{{r \choose k}{n-r \choose m-k}}{{n \choose m}} =
+\frac{\frac{r(r-1) \cdots (r-k+1)}{k!}\frac{(n-r)(n-r-1) \cdots (n-r-(m-k)+1)}{(m-k)!}}{\frac{n(n-1)\cdots(n-m+1)}{m!}} \\
+= \frac{m!}{k!(m-k)!} \frac{\overbrace{r(r-1) \cdots (r-k+1)}^\text{$k$ terms}
+\overbrace{(n-r)(n-r-1) \cdots (n-r-(m-k)+1)}^\text{$m-k$ terms}}{\underbrace{n(n-1)\cdots(n-m+1)}_\text{$m$ terms}}\\
+= {m \choose k}\underbrace{\frac{r}{n}\frac{r-1}{n-1}\cdots\frac{r-k+1}{n-k+1}}_\text{$k$ terms}\underbrace{\frac{n-r}{n-k}
+\frac{n-r-1}{n-k-1}\cdots\frac{n-r-(m-k)+1}{n}}_\text{$m-k$ terms}
+\]</p>
+
+</article></slide><slide class=''><hgroup><h2>added after class - hypergeom vs. binom - V</h2></hgroup><article  id="added-after-class---hypergeom-vs.-binom---v" class="small">
+
+<p>(You are not responsible for this material.)</p>
+
+<p>Now let \(n\) and \(r\) go to \(\infty\), but in proportion so that \(r/n\) goes to a constant \(0&lt;p&lt;1\).</p>
+
+<p>There is a fixed number of terms, so the limit can be applied one term at a time. The first \(k\) terms convege to \(r/n=p\) and the last \(m-k\) terms converge to \((n-r)/n = 1-p\). So the whole thing converges to:</p>
+
+<p>\[{m \choose k} p^k(1-p)^{m-k}\]</p>
 
 </article></slide><slide class=''><hgroup><h2>digression &#8212; constants as &quot;random variables&quot;</h2></hgroup><article  id="digression-----constants-as-random-variables">
 
